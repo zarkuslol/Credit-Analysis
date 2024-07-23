@@ -4,6 +4,10 @@ output: github_document
 editor_options: 
   chunk_output_type: console
 ---
+# Introduction
+This project aims to evaluate the creditworthiness of individuals by analyzing various financial and demographic factors. By leveraging statistical techniques and machine learning models, the analysis seeks to identify patterns and predictors of credit risk, helping lenders make informed decisions.
+
+# Data Exploration/Insights and Interpretation
 
 So, first, let's see the head of our data.
 
@@ -21,17 +25,69 @@ data <- read.csv('../data/cleaned/credit.csv')
 knitr::kable(head(data), 'pipe')
 ```
 
+In this dataset, we can see various information about the bank's customers, such as their age, gender, education, how many children they have, marital status, their monthly earnings and expenses, how long the customer has been affiliated with the bank and, our target feature, how much is your credit limit on the card.
 
+To make it possible to understand what affects the credit limit, let's study some variables and their behavior when correlated with our future 'output'. To begin with, let's evaluate the categorical variables.
 
+## Marital Status
 
+```{r include=FALSE, eval=TRUE}
+# Verifying correlation between categorical data and Credit.Limit
+plot_categorical_data_with_cl <- function(data, column.name, color) {
+  return(
+    ggplot(data, aes(x = !!sym(column.name), y = Credit.Limit)) +
+      geom_boxplot() +
+      scale_y_continuous(labels = scales::comma) +
+      theme_classic() +
+      labs(
+        title = sprintf('Credit limit distribution for %s', column.name),
+        subtitle = sprintf('How %s impacts credit limit', column.name),
+        caption = 'Data source: EBAC Online Courses',
+        x = column.name,
+        y = 'Credit Limit'
+      )
+  )
+}
 
+# Verifying correlation between continuous data and Credit.Limit
+plot_continuous_data_with_cl <- function(data, column.name, color) {
+  return(
+    ggplot(data) +
+      geom_bar(aes(x=.data[[column.name]], y=Credit.Limit), stat = 'identity', fill = color) +
+      scale_y_continuous(labels = scales::comma) +
+      theme_classic() +
+      labs(
+        title = sprintf('Credit limit distribution for %s', column.name),
+        subtitle = sprintf('How %s impacts in credit limit', column.name),
+        caption = 'Data font: EBAC Online Courses',
+        y = 'Credit Limit',
+      )
+  )
+}
+```
 
+```{r include=TRUE}
+# Showing data head
+plot_categorical_data_with_cl(data, 'Marital.Status', 'gray75')
+```
 
+## Education
 
+```{r include=TRUE}
+# Showing data head
+plot_categorical_data_with_cl(data, 'Education', 'gray75')
+```
 
+Now, we're gonna do the same rational, but with our continuous variables.
 
+## Dependents
 
+```{r include=TRUE}
+# Showing data head
+plot_continuous_data_with_cl(data, 'Dependents', 'gray75')
+```
 
+(In the future, change it to correlation map with the continuous data)
 
 
 
