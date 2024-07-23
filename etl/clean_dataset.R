@@ -44,5 +44,11 @@ cleaned.dataset$limite_credito <- convert.to.numeric(cleaned.dataset, 'limite_cr
 # Converting df to data.table
 cleaned.dataset <- data.table::data.table(cleaned.dataset)
 
+# Changing columns names
+colnames(cleaned.dataset) <- c('Age', 'Gender', 'Dependents', 'Education', 'Marital Status',
+                               'Annual Salary', 'Card Type', 'Months of Relationship', 'Products',
+                               'Iterations 12m', 'Number of Months Inactive 12m', 'Transactions Amount 12m',
+                               'Transactions 12m', 'Credit Limit')
+
 # Saving dataset in 'data\\cleaned' folder
 write.csv(cleaned.dataset, 'data\\cleaned\\credit.csv', row.names = F)
