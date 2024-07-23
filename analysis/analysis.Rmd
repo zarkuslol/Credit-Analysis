@@ -1,0 +1,39 @@
+---
+title: "Credit Analysis"
+output: github_document
+editor_options: 
+  chunk_output_type: console
+---
+
+So, first, let's see the head of our data.
+
+```{r setup, include=FALSE, eval=TRUE}
+# Imports
+library(tidyverse)
+library(knitr)
+
+# Loading data
+data <- read.csv('../data/cleaned/credit.csv')
+```
+
+```{r include=TRUE}
+# Showing data head
+knitr::kable(head(data), 'pipe')
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
